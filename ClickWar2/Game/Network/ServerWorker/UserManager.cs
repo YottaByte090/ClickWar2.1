@@ -8,6 +8,8 @@ using System.Drawing;
 using ClickWar2.Network;
 using ClickWar2.Network.IO;
 using ClickWar2.Network.Protocol;
+using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace ClickWar2.Game.Network.ServerWorker
 {
@@ -115,13 +117,38 @@ namespace ClickWar2.Game.Network.ServerWorker
                 {
                     Version fileVersion = new Version(sr.ReadLine().Trim());
 
-
-                    while (!sr.EndOfStream)
+                    if(int.Parse(fileVersion.ToString().Split('.')[0]) <= 2 && int.Parse(fileVersion.ToString().Split('.')[1]) <= 1 && int.Parse(fileVersion.ToString().Split('.')[2]) <= 0 && int.Parse(fileVersion.ToString().Split('.')[3]) <= 0)
                     {
-                        var account = new GamePlayer();
-                        account.LoadFrom(sr);
+                        while (!sr.EndOfStream)
+                        {
+                            var account = new GamePlayer();
+                            account.LoadFrom(sr);
 
-                        m_accountList.Add(account.Name, account);
+                            SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
+                            byte[] hashByteArray;
+                            string hashString = string.Empty;
+                            string plainString = account.Password;
+
+                            hashByteArray = sha256.ComputeHash(Encoding.UTF8.GetBytes(plainString));
+
+                            foreach (byte b in hashByteArray)
+                            {
+                                hashString += String.Format("{0:x2}", b);
+                            }
+
+                            account.Password = hashString;
+                            m_accountList.Add(account.Name, account);
+                        }
+                    }
+                    else
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            var account = new GamePlayer();
+                            account.LoadFrom(sr);
+
+                            m_accountList.Add(account.Name, account);
+                        }
                     }
                 }
             }
@@ -316,11 +343,9 @@ namespace ClickWar2.Game.Network.ServerWorker
         {
             RegisterResults registerResult = RegisterResults.Success;
 
-
             string userName = msg.ReadData<string>().Trim();
             string password = msg.ReadData<string>();
             Color userColor = Color.FromArgb(msg.ReadData<int>());
-
 
             // 회원여부 확인
             string userListFile = this.ServerPath + this.UserFileName;

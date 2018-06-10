@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ClickWar2.Game.Network.GameServer">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAwCSBAQALAABAAAAAAEAABEAEIAEAQAJKSAAhAAQAA=</HashCode>
+      <FileName>Game\Network\GameServer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_userDataManager" />
+      <Field Name="m_server" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ClickWar2.Game.Network.ServerWorker.UserDataManager">
+    <Position X="4.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEAgARAAAACAAAAAAAAACAAABAAAAAAABAAAAIAAAAA=</HashCode>
+      <FileName>Game\Network\ServerWorker\UserDataManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserDirector" />
+      <Property Name="CompanyDirector" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ClickWar2.Game.Network.ServerWorker.CompanyManager">
+    <Position X="9.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CFEoBBQQAIIGBBQRhDKBABQgAgAggEAAAMEABhgBAIk=</HashCode>
+      <FileName>Game\Network\ServerWorker\CompanyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClickWar2.Game.Network.ServerWorker.UserManager">
+    <Position X="11.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABkCAAQCAAAAAAAAAAAAAKBADBAAACAAAEIA1ggJEA=</HashCode>
+      <FileName>Game\Network\ServerWorker\UserManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClickWar2.Network.NetServer">
+    <Position X="0.5" Y="11.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAggAACBAAMAAICggiIAEACAAAQACIAAAQoAAAAA=</HashCode>
+      <FileName>Network\NetServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClickWar2.Network.ServerVisitor">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAgAAEAAgAAAAAAAAEAQAAAgAAAABIAAA=</HashCode>
+      <FileName>Network\ServerVisitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClickWar2.Network.IO.NetReceiver">
+    <Position X="17.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>iAAAkgAASCAAAAAAFACAEAAEACAAAEAAoAAAAAAIABg=</HashCode>
+      <FileName>Network\IO\NetReceiver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
+using System.Security.Cryptography;
 
 namespace ClickWar2.Game
 {
@@ -63,12 +64,18 @@ namespace ClickWar2.Game
 
         public void LoadFrom(StreamReader sr)
         {
+            SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
+            byte[] hashByteArray;
+            string hashString = string.Empty;
+
             this.Mailbox.Clear();
             this.Companies.Clear();
 
 
             this.Name = sr.ReadLine();
             this.Password = sr.ReadLine();
+
+
             this.AreaCount = Convert.ToInt32(sr.ReadLine());
             this.UserColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));
             this.Resource = Convert.ToInt32(sr.ReadLine());

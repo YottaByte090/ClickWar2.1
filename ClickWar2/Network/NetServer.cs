@@ -82,7 +82,8 @@ namespace ClickWar2.Network
             {
                 m_listener = null;
                 return;
-            }
+            }      
+
 
 
             // 클라이언트 접속처리용 쓰레드 생성 및 시작

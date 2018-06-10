@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -176,7 +177,21 @@ namespace ClickWar2_Client
 
 
                         // 로그인 요청
-                        m_client.SignDirector.Login(this.textBox_name.Text, this.textBox_password.Text,
+                        SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
+                        byte[] hashByteArray;
+                        string hashString = string.Empty;
+                        string plainString = this.textBox_password.Text;
+
+                        hashByteArray = sha256.ComputeHash(Encoding.UTF8.GetBytes(plainString));
+
+                        foreach (byte b in hashByteArray)
+                        {
+                            hashString += String.Format("{0:x2}", b);
+                        }
+
+                        MessageBox.Show("평문 값 " + plainString + "\n해쉬 값 " + hashString);
+
+                        m_client.SignDirector.Login(this.textBox_name.Text, hashString,
                             this.WhenReceiveLoginResult);
 
                         this.timer_update.Start();
@@ -314,8 +329,20 @@ namespace ClickWar2_Client
 
                         if (color.R >= 100 || color.G >= 100 || color.B >= 100)
                         {
+                            SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
+                            byte[] hashByteArray;
+                            string hashString = string.Empty;
+                            string plainString = this.textBox_password.Text;
+
+                            hashByteArray = sha256.ComputeHash(Encoding.UTF8.GetBytes(plainString));
+
+                            foreach (byte b in hashByteArray)
+                            {
+                                hashString += String.Format("{0:x2}", b);
+                            }
+
                             // 회원가입 요청
-                            m_client.SignDirector.Register(this.textBox_name.Text, this.textBox_password.Text,
+                            m_client.SignDirector.Register(this.textBox_name.Text, hashString,
                                 color,
                                 this.WhenReceiveRegisterResult);
 
